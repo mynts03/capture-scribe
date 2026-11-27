@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "CaptureScribe",
+  "version": "0.1.1",
+  "identifier": "studio.capturescribe.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev:product",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build:product",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "CaptureScribe",
+        "width": 1100,
+        "height": 780,
+        "minWidth": 600,
+        "minHeight": 650
+      }
+    ],
+    "security": { "csp": null }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["app"],
+    "icon": ["icons/icon.png", "icons/icon.icns", "icons/icon.ico"],
+    "externalBin": [
+      "../native/macos-capture-helper/.build/release/capture-scribe-capture"
+    ],
+    "resources": {
+      "../native/apple-speech-transcriber/.build/release/apple-transcriber": "bin/apple-transcriber",
+      "../worker/capture_scribe_worker.py": "worker/capture_scribe_worker.py",
+      "../worker/split_timing.py": "worker/split_timing.py",
+      "../worker/split_video_encode.py": "worker/split_video_encode.py"
+    },
+    "macOS": {
+      "minimumSystemVersion": "15.0"
+    }
+  }
+}
